@@ -3,17 +3,19 @@ var express = require('express');
 var app = express.createServer(express.logger());
 var buffer = new Buffer(16);
 
-buffer.readFileSync('index.html', function(err, data) {
+var fs = require('fs');
+
+fs.readFileSync('index.html', function(err, data) {
     if(err) throw err;
     console.log(data);
 });
 
-buffer.toString('utf-8')
+buffer.write(fs);
 
 
 app.get('/', function(request, response) {
- // response.send('Hello World 2!');
- response.send('Hello World 2!');
+ // response.send();
+ response.send(buffer.toString('utf-8'));
 });
 
 var port = process.env.PORT || 5000;
